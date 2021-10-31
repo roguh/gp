@@ -1,3 +1,3 @@
 #!/bin/sh
 set -x
-sed -i "s/VERSION=.*/$1/" ./gp
+sed -i "s/VERSION=.*/VERSION=$1/" ./gp
