@@ -46,5 +46,6 @@ test_echo Testing "$SHELL_COUNT" shells finished successfully
 test_echo "$TOTAL_TESTS_PASSED" tests passed in total
 if [ "$TESTS_FAILED" = true ]; then
     test_echo SOME TESTS FAILED
+    test_echo Make sure to remove any test branches from your repo that were left behind.
     exit 1
 fi
