@@ -38,7 +38,7 @@ verbose() {
 ##### Parse arguments
 if [ "$#" -gt 1 ]; then
   usage
-  echo "Wrong number of arguments"
+  echo "ERROR: Wrong number of arguments"
   exit 1
 fi
 
@@ -52,6 +52,12 @@ elif [ "$1" = "--version" ]; then
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   usage
   exit 0
+elif [ "$1" = "" ]; then
+  true
+else
+  usage
+  echo "ERROR: Unrecognized argument $1"
+  exit 1
 fi
 
 ##### Check if in git repo

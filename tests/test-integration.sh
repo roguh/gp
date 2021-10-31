@@ -44,7 +44,28 @@ check-repo-is-clean.sh Please commit your changes before running gp tests
 test_echo gp version is "$(gp --version)"
 test_echo Shell is "$SHELL"
 
-it refuses to push new remote branch and verbose output.
+it handles help and version arguments
+set -x
+"$SHELL" gp --help
+"$SHELL" gp -h
+"$SHELL" gp --version
+set +x
+end_test
+
+it handles unrecognized arguments
+set +e
+set -x
+for args in --halp -vf nope '--help too many'; do
+    if "$SHELL" gp $args; then
+        test_echo TEST FAILURE. gp should not have accepted arguments "$args"
+        exit 1
+    fi
+done
+set +x
+set -e
+end_test
+
+it refuses to push new remote branch with verbose output.
 set -x
 git checkout -b "$BRANCH0"
 test-make-commit.sh
