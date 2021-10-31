@@ -8,19 +8,19 @@ Like the waves.
 gp --help
 gp: Pull, push, push new branch. Version 1.2
 
-USAGE: ./gp [-f|-v|-h|--version]
+- If there are changes in the remote branch, pull
+- If there are changes in the local branch, push
+- If there is no remote branch, prompt to push a new branch.
+  Skip prompt with gp -f
+- If the branches have diverged, do nothing.
+  Force push with gp -f
+
+USAGE: gp [-f|-v|-h|--version]
     -f|--force   Do not prompt for verification when pushing new branch.
                  Force push when local and remote branches diverged.
     -v|--verbose Show more output.
     --version    Show program version.
     -h|--help    Show this message.
-
-If there is no remote branch, prompt to push a new branch.
-  Skip prompt with gp -f
-If there are changes in the remote branch, pull
-If there are changes in the local branch, push
-If the branches have diverged, do nothing.
-  Force push with gp -f
 
 ```
 
