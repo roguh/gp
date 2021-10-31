@@ -40,7 +40,7 @@ delete_branch() {
 }
 
 check_in_branch() {
-    if ! [ "$(git branch --show-current)" = "$1" ]; then
+    if [ "$(git branch --show-current)" != "$1" ]; then
         test_echo TEST FAILURE. Not in expected branch "$1"
         exit 1
     fi
@@ -77,7 +77,7 @@ set -x
 git checkout -b "$BRANCH0"
 test-make-commit.sh
 set +e
-if ! printf "nope\n" | "$SHELL" gp --verbose; then
+if printf "nope\n" | "$SHELL" gp --verbose || false; then
     test_echo TEST FAILURE. STATUS CODE IS ZERO
     exit 1
 fi
