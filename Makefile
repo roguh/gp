@@ -10,7 +10,7 @@ release:
 	./tests/check-repo-is-clean.sh Please commit your changes before bumping version
 	./utils/bump-version.sh $(VERSION)
 	make build-readme
-	git commit -am 'Bump version'
+	git commit -am "Bump version to $(VERSION)"
 	git tag v$(VERSION)
 	git push origin --tags
 
