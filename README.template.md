@@ -1,5 +1,10 @@
 # gp: Git pull, push, push new remote branch
 
+<!--
+EDIT README.template.md, not README.md directly.
+Use `make build-readme to update the README file
+-->
+
 Like the waves.
 
 ## Usage
