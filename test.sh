@@ -20,7 +20,11 @@ end_test() {
 }
 
 test_echo() {
-    echo [test] "$@"
+    echo [gp-test] "$@"
+}
+
+it() {
+    test_echo test \#"$TEST_COUNT": gp "$@"
 }
 
 delete_branch() {
@@ -33,7 +37,7 @@ delete_branch() {
 
 test_echo Shell is "$SHELL"
 
-test_echo Refuse to push new remote branch and verbose output.
+it refuses to push new remote branch and verbose output.
 set -x
 git checkout -b "$BRANCH0"
 ./test-make-commit.sh
@@ -47,7 +51,7 @@ delete_branch "$BRANCH0" local_only
 set +x
 end_test
 
-test_echo Push new remote branch.
+it pushes new remote branch.
 set -x
 git checkout -b "$BRANCH1"
 ./test-make-commit.sh
@@ -56,7 +60,7 @@ delete_branch "$BRANCH1"
 set +x
 end_test
 
-test_echo Push new remote branch without verification
+it pushes new remote branch without verification
 set -x
 git checkout -b "$BRANCH2"
 ./test-make-commit.sh
@@ -64,35 +68,35 @@ git checkout -b "$BRANCH2"
 set +x
 end_test
 
-test_echo Push new commit on existing remote branch
+it pushes new commit on existing remote branch
 set -x
 ./test-make-commit.sh
 "$SHELL" ./gp
 set +x
 end_test
 
-test_echo Avoid force pushing
+it avoids force pushing
 set -x
 git commit --amend -m 'Amended'
 "$SHELL" ./gp
 set +x
 end_test
 
-test_echo Please force push
+it can force push
 set -x
 git commit --amend -m 'Amended'
 "$SHELL" ./gp -f
 set +x
 end_test
 
-test_echo Please force push. Use alternate option
+it can force push. Use alternate option
 set -x
 git commit --amend -m 'Amended 2'
 "$SHELL" ./gp --force
 set +x
 end_test
 
-test_echo Pull
+it pulls
 set -x
 git reset --hard HEAD~1
 "$SHELL" ./gp
@@ -105,3 +109,4 @@ set +x
 
 test_echo End of tests.
 test_echo "$TEST_COUNT" tests passed
+echo "$TEST_COUNT" > .test-pass-count
