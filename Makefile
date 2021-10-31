@@ -6,7 +6,7 @@ build-readme:
 
 release:
 	# Check version is valid
-	echo $(VERSION) | grep '^[0-9]\+\.[0-9]\+$$' || (echo Must pass version string as \`make VERSION=XX.YY\` && false)
+	echo $(VERSION) | grep '^[0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?$$' || (echo Must pass version string as \`make VERSION=XX.YY[.ZZ]\` && false)
 	./tests/check-repo-is-clean.sh Please commit your changes before bumping version
 	./utils/bump-version.sh $(VERSION)
 	make build-readme
