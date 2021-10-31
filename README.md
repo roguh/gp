@@ -1,5 +1,10 @@
 # gp: Git pull, push, push new remote branch
 
+<!--
+EDIT README.template.md, not README.md directly.
+Use `make build-readme to update the README file
+-->
+
 Like the waves.
 
 ## Usage
@@ -101,3 +106,11 @@ Tested using GNU coreutils 9.0 in these shells:
 - bash 5.1
 - bash 5.1 in bash 3.1 compatibility mode BASH_COMPAT=31
 - zsh 5.8
+
+## Linting and Compatibility Check
+
+Use shellcheck to check shellscripts.
+
+```
+make check
+```

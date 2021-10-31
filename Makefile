@@ -15,7 +15,7 @@ install:
 uninstall:
 	echo Remove the files: ${SHELLSCRIPTS} from your PATH
 
-checkbashisms:
+check:
 	shellcheck ${ALL_SHELLSCRIPTS}
 
 test-on-linux:
