@@ -13,12 +13,19 @@ usage() {
   # Print usage/help
   echo "gp: Pull, push, push new branch. Version $VERSION"
   echo
-  echo "USAGE: $0 [-f|--force|-h|--help]"
+  echo "USAGE: $0 [-f|-v|-h|--version]"
   echo "    -f|--force   Do not prompt for verification when pushing new branch."
   echo "                 Force push when local and remote branches diverged."
   echo "    -v|--verbose Show more output."
   echo "    --version    Show program version."
   echo "    -h|--help    Show this message."
+  echo
+  echo If there is no remote branch, prompt to push a new branch.
+  echo "  Skip prompt with gp -f"
+  echo If there are changes in the remote branch, pull
+  echo If there are changes in the local branch, push
+  echo If the branches have diverged, do nothing.
+  echo "  Force push with gp -f"
 }
 
 verbose() {
