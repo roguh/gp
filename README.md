@@ -23,17 +23,33 @@ gp -f
 
 ## Installation
 
-Simply copy `gp` to your favorite binary location.
-
-Alternatively, run
+### Option 1:
 
 ```
+curl https://raw.githubusercontent.com/roguh/gp/main/gp > gp
+chmod +x gp
+sudo cp gp /usr/bin/gp
+```
+
+### Option 2:
+
+1. Download [raw.githubusercontent.com/roguh/gp/main/gp](https://raw.githubusercontent.com/roguh/gp/main/gp) or `git clone https://github.com/roguh/gp.git`.
+2. Move [`gp`](https://raw.githubusercontent.com/roguh/gp/main/gp) to your favorite binary location.
+
+
+### Option 3:
+
+```
+git clone https://github.com/roguh/gp.git
+cd gp
 make install
 ```
 
 OR
 
 ```
+git clone https://github.com/roguh/gp.git
+cd gp
 make install-to-user
 ```
 
