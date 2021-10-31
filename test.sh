@@ -15,7 +15,7 @@ BRANCH2="test2-$(date +%Y-%m-%d)"
 TEST_COUNT=0
 
 end_test() {
-    TEST_COUNT=$(($TEST_COUNT + 1))
+    TEST_COUNT=$((TEST_COUNT + 1))
 }
 
 test_echo() {
@@ -43,8 +43,7 @@ set -x
 git checkout -b "$BRANCH0"
 ./test-make-commit.sh
 set +e
-printf "nope\n" | "$SHELL" ./gp --verbose
-if [ "$?" = 0 ]; then
+if ! printf "nope\n" | "$SHELL" ./gp --verbose; then
     test_echo TEST FAILURE. STATUS CODE IS ZERO
 fi
 set -e

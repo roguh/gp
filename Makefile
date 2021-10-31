@@ -1,5 +1,5 @@
 SHELLSCRIPTS=gp git-remote-status.sh
-ALL_SHELLSCRIPTS=${SHELLSCRIPTS} test-install.sh test-make-commit.sh test.sh
+ALL_SHELLSCRIPTS=${SHELLSCRIPTS} test-all-shells.sh test.sh test-install.sh test-make-commit.sh check-repo-is-clean.sh
 
 install-to-user:
 	cp ${SHELLSCRIPTS} ~/bin/
