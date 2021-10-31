@@ -34,13 +34,7 @@ delete_branch() {
     git branch -D "$1"
 }
 
-set +e
-CHANGES_TO_GIT_FILES="$(git status --porcelain | grep -v "^?? ")"
-set -e
-if ! [ "$CHANGES_TO_GIT_FILES" = "" ]; then
-    echo Please commit your changes before running gp tests
-    exit 1
-fi
+./check-repo-is-clean.sh Please commit your changes before running gp tests
 
 test_echo Shell is "$SHELL"
 

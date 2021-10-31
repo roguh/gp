@@ -13,6 +13,8 @@ test_echo() {
     echo '[gp-all-test]' "$@"
 }
 
+./check-repo-is-clean.sh Please commit your changes before running gp tests
+
 for TEST_SHELL in $@; do
     if ! command -v "$TEST_SHELL" > /dev/null; then
         test_echo "$TEST_SHELL" not installed. Skipping tests.
