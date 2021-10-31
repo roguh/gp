@@ -4,6 +4,16 @@ ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 test-install.sh $(shell find tes
 build-readme:
 	./utils/generate_readme.py ./README.template.md > ./README.md
 
+release:
+	# Check version is valid
+	echo $(VERSION) | grep '^[0-9]\+\.[0-9]\+$$' || (echo Must pass version string as \`make VERSION=XX.YY\` && false)
+	./tests/check-repo-is-clean.sh Please commit your changes before bumping version
+	./utils/bump-version.sh $(VERSION)
+	make build-readme
+	git commit -am 'Bump version'
+	git tag v$(VERSION)
+	git push origin --tags
+
 install-to-user:
 	cp ${SHELLSCRIPTS} ~/bin/
 	./tests/test-install.sh ~/bin/
