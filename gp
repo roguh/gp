@@ -78,6 +78,7 @@ else
     verbose FORCE PUSHING
     set -x
     git push "$@"
+    set +x
   fi
   verbose Not running any commands
   echo "$REMOTE_STATUS"
