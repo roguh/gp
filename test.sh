@@ -14,7 +14,6 @@ BRANCH2="test2-$(date +%Y-%m-%d)"
 
 TEST_COUNT=0
 
-set +x
 end_test() {
     TEST_COUNT=$(($TEST_COUNT + 1))
 }
