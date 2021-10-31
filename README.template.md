@@ -63,13 +63,25 @@ Make sure you have permission to push new branches to the remote repository.
 If the test script fails, the tests have failed.
 Also read the output to determine if `gp` is behaving correctly.
 
-### Running tests for many shells at once
+Note the `test-all-shells.sh` script runs the `test-integration.sh` script using the test shell itself.
+
+### Linux: Running tests for many shells at once
 
 ```
 make test-on-linux
 ```
 
-Note this command runs the `test-integration.sh` within the test shell itself.
+### MacOS: Running tests for many shells at once
+
+```
+make test-on-macos
+```
+
+### Running tests for stricter POSIX shells
+
+```
+make test-on-strict-posix-shells
+```
 
 ### Running tests one shell at a time
 
@@ -85,12 +97,18 @@ BASH_COMPAT=31 ./tests/test-integration.sh bash
 
 ### Test results
 
+### Linux
+
 Tested using GNU coreutils 9.0 in these shells:
 
 - dash 0.5
 - bash 5.1
 - bash 5.1 in bash 3.1 compatibility mode BASH_COMPAT=31
 - zsh 5.8
+
+### MacOS
+
+Not tested on MacOS, yet. It should work fine.
 
 ## Linting and Compatibility Check
 

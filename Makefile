@@ -21,6 +21,13 @@ check:
 test-on-linux:
 	./tests/test-all-shells.sh dash bash zsh ./tests/bash-3.1
 
+test-on-strict-posix-shells:
+	./tests/test-all-shells.sh yash ksh
+
+test-on-macos:
+	# TODO add other shells?
+	./tests/test-all-shells.sh bash zsh
+
 line-count:
 	cloc ${SHELLSCRIPTS}
 	cloc tests
