@@ -1,5 +1,5 @@
 SHELLSCRIPTS=gp git-remote-status.sh
-ALL_SHELLSCRIPTS=${SHELLSCRIPTS} test-all-shells.sh test.sh test-install.sh test-make-commit.sh check-repo-is-clean.sh
+ALL_SHELLSCRIPTS=${SHELLSCRIPTS} test-install.sh $(shell find tests -iname \*.sh)
 
 install-to-user:
 	cp ${SHELLSCRIPTS} ~/bin/
@@ -16,4 +16,4 @@ checkbashisms:
 	shellcheck ${ALL_SHELLSCRIPTS}
 
 test-on-linux:
-	./test-all-shells.sh sh dash bash zsh
+	./tests/test-all-shells.sh sh dash bash zsh

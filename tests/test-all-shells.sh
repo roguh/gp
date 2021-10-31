@@ -1,4 +1,7 @@
 #!/bin/sh
+SCRIPT_PATH="$(dirname "$0")"
+PATH="$SCRIPT_PATH:$PATH"
+
 if [ "$#" = 0 ]; then
     echo "USAGE: $0 shell1 shell2 ..."
     echo "    Example: $0 sh bash"
@@ -14,7 +17,7 @@ test_echo() {
     echo '[gp-all-test]' "$@"
 }
 
-if ! ./check-repo-is-clean.sh Please commit your changes before running gp tests; then
+if ! check-repo-is-clean.sh Please commit your changes before running gp tests; then
     exit 1
 fi
 
@@ -26,20 +29,20 @@ for TEST_SHELL in "$@"; do
 
     SHELL_COUNT=$((SHELL_COUNT + 1))
 
-    echo 0 > .test-pass-count
+    echo 0 > "$SCRIPT_PATH/.test-pass-count"
 
     START_TIME=$(date +%s)
 
-    TEST_OUTPUT="test-results.$TEST_SHELL.txt"
-    test_echo "$TEST_SHELL" ./test.sh "$TEST_SHELL"
-    if "$TEST_SHELL" ./test.sh "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1; then
+    TEST_OUTPUT="$SCRIPT_PATH/test-results.$TEST_SHELL.txt"
+    test_echo "$TEST_SHELL" "$SCRIPT_PATH/test.sh" "$TEST_SHELL"
+    if "$TEST_SHELL" "$SCRIPT_PATH/test.sh" "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1; then
         test_echo "SHELL=$TEST_SHELL Tests passed"
     else
         test_echo "SHELL=$TEST_SHELL Tests failed"
         TESTS_FAILED=true
     fi
 
-    TEST_COUNT="$(cat .test-pass-count)"
+    TEST_COUNT="$(cat "$SCRIPT_PATH/.test-pass-count")"
     DURATION=$(($(date +%s) - START_TIME))
     TOTAL_DURATION=$((TOTAL_DURATION + DURATION))
     test_echo "SHELL=$TEST_SHELL $TEST_COUNT tests passed in $DURATION seconds. Output in $TEST_OUTPUT"

@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+SCRIPT_PATH="$(dirname "$0")"
+
+# Assuming `gp` is installed in the directory above this file's directory
+PATH="$SCRIPT_PATH:$(dirname "$SCRIPT_PATH"):$PATH"
+
 if [ "$#" != 1 ]; then
     echo "USAGE: $0 [sh|dash|bash|zsh]"
     exit 1
@@ -109,4 +114,4 @@ set +x
 
 test_echo End of tests.
 test_echo "$TEST_COUNT" tests passed
-echo "$TEST_COUNT" > .test-pass-count
+echo "$TEST_COUNT" > "$SCRIPT_PATH/.test-pass-count"
