@@ -13,6 +13,8 @@ for TEST_SHELL in sh dash bash zsh; do
 
     echo 0 > .test-pass-count
 
+    START_TIME=$(date +%s)
+
     TEST_OUTPUT="test-results.$TEST_SHELL.txt"
     test_echo "$TEST_SHELL" ./test.sh "$TEST_SHELL"
     "$TEST_SHELL" ./test.sh "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1
@@ -24,7 +26,8 @@ for TEST_SHELL in sh dash bash zsh; do
     fi
 
     TEST_COUNT="$(cat .test-pass-count)"
-    test_echo "SHELL=$TEST_SHELL $TEST_COUNT tests passed. Output in $TEST_OUTPUT"
+    DURATION=$(($(date +%s) - "$START_TIME"))
+    test_echo "SHELL=$TEST_SHELL $TEST_COUNT tests passed in $DURATION seconds. Output in $TEST_OUTPUT"
     TOTAL_TESTS_PASSED=$(($TOTAL_TESTS_PASSED + $TEST_COUNT))
 done
 
