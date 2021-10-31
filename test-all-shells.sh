@@ -2,7 +2,7 @@
 TOTAL_TESTS_PASSED=0
 
 test_echo() {
-    echo [gp-all-test] "$@"
+    echo '[gp-all-test]' "$@"
 }
 
 for TEST_SHELL in sh dash bash zsh; do

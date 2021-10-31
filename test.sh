@@ -19,7 +19,7 @@ end_test() {
 }
 
 test_echo() {
-    echo [gp-test] "$@"
+    echo '[gp-test]' "$@"
 }
 
 it() {
