@@ -45,14 +45,24 @@ Make sure you have permission to push new branches to the remote repository.
 If the test script fails, the tests have failed.
 Also read the output to determine if `gp` is behaving correctly.
 
-Run the following commands and press ENTER when you are prompted.
+### Running tests for many shells at once
 
 ```
-./test.sh sh
-./test.sh dash
-./test.sh bash
-BASH_COMPAT=31 ./test.sh bash
-./test.sh zsh
+make test-on-linux
+```
+
+Note this command runs the `test.sh` within the test shell itself.
+
+### Running tests one shell at a time
+
+Run the following commands:
+
+```
+./tests/test.sh sh
+./tests/test.sh dash
+./tests/test.sh bash
+BASH_COMPAT=31 ./tests/test.sh bash
+./tests/test.sh zsh
 ```
 
 ### Test results
