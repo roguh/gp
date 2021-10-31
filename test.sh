@@ -35,6 +35,12 @@ delete_branch() {
     git branch -D "$1"
 }
 
+CHANGES_TO_GIT_FILES=$(git status --porcelain | grep -v "^?? ")
+if ! [ "$CHANGES_TO_GIT_FILES" = "" ]; then
+    echo Please commit your changes before running gp tests
+    exit 1
+fi
+
 test_echo Shell is "$SHELL"
 
 it refuses to push new remote branch and verbose output.
