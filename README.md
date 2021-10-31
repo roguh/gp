@@ -24,8 +24,8 @@ USAGE: gp [-f|-v|-h|--version]
     -f|--force   Do not prompt for verification when pushing new branch.
                  Force push when local and remote branches diverged.
     -v|--verbose Show more output.
-    --version    Show program version.
     -h|--help    Show this message.
+    --version    Show program version.
 
 ```
 

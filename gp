@@ -24,8 +24,8 @@ usage() {
   echo "    -f|--force   Do not prompt for verification when pushing new branch."
   echo "                 Force push when local and remote branches diverged."
   echo "    -v|--verbose Show more output."
-  echo "    --version    Show program version."
   echo "    -h|--help    Show this message."
+  echo "    --version    Show program version."
 }
 
 verbose() {
