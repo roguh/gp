@@ -34,7 +34,7 @@ for TEST_SHELL in "$@"; do
     START_TIME=$(date +%s)
 
     TEST_OUTPUT="$SCRIPT_PATH/test-results.$TEST_SHELL.txt"
-    test_echo "$TEST_SHELL" "$SCRIPT_PATH/test.sh" "$TEST_SHELL"
+    test_echo Running: "$TEST_SHELL" "$SCRIPT_PATH/test.sh" "$TEST_SHELL"
     if "$TEST_SHELL" "$SCRIPT_PATH/test.sh" "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1; then
         test_echo "SHELL=$TEST_SHELL Tests passed"
     else
