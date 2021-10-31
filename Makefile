@@ -15,5 +15,5 @@ uninstall:
 checkbashisms:
 	shellcheck ${ALL_SHELLSCRIPTS}
 
-test:
-	./test-all-shells.sh
+test-on-linux:
+	./test-all-shells.sh sh dash bash zsh

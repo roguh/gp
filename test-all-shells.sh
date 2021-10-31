@@ -1,11 +1,17 @@
 #!/bin/sh
+if [ "$#" = 0 ]; then
+    echo "USAGE: $0 shell1 shell2 ..."
+    echo "    Example: $0 sh bash"
+    exit 1
+fi
+
 TOTAL_TESTS_PASSED=0
 
 test_echo() {
     echo '[gp-all-test]' "$@"
 }
 
-for TEST_SHELL in sh dash bash zsh; do
+for TEST_SHELL in $@; do
     if ! command -v "$TEST_SHELL" > /dev/null; then
         test_echo "$TEST_SHELL" not installed. Skipping tests.
         continue
