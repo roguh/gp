@@ -17,3 +17,7 @@ checkbashisms:
 
 test-on-linux:
 	./tests/test-all-shells.sh dash bash zsh ./tests/bash-3.1
+
+line-count:
+	cloc ${SHELLSCRIPTS}
+	cloc tests
