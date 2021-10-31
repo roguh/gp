@@ -69,15 +69,15 @@ if [ "$REMOTE_STATUS" = "No remote" ]; then
   git push --set-upstream origin "$(git branch --show-current)"
 elif [ "$REMOTE_STATUS" = "Need to pull" ]; then
   set -x
-  git pull "$@"
+  git pull
 elif [ "$REMOTE_STATUS" = "Need to push" ]; then
   set -x
-  git push "$@"
+  git push
 else
   if [ "$REMOTE_STATUS" = "Diverged" ] && [ "$FORCE" = "true" ]; then
     verbose FORCE PUSHING
     set -x
-    git push "$@"
+    git push --force
     set +x
   fi
   verbose Not running any commands
