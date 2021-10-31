@@ -6,6 +6,8 @@ if [ "$#" = 0 ]; then
 fi
 
 TOTAL_TESTS_PASSED=0
+SHELL_COUNT=0
+TESTS_FAILED=false
 
 test_echo() {
     echo '[gp-all-test]' "$@"
@@ -16,6 +18,8 @@ for TEST_SHELL in $@; do
         test_echo "$TEST_SHELL" not installed. Skipping tests.
         continue
     fi
+
+    SHELL_COUNT=$(($SHELL_COUNT + 1))
 
     echo 0 > .test-pass-count
 
@@ -29,6 +33,7 @@ for TEST_SHELL in $@; do
         test_echo "SHELL=$TEST_SHELL Tests passed"
     else
         test_echo "SHELL=$TEST_SHELL Tests failed"
+        TESTS_FAILED=true
     fi
 
     TEST_COUNT="$(cat .test-pass-count)"
@@ -37,5 +42,9 @@ for TEST_SHELL in $@; do
     TOTAL_TESTS_PASSED=$(($TOTAL_TESTS_PASSED + $TEST_COUNT))
 done
 
-test_echo Testing finished successfully
+test_echo Testing "$SHELL_COUNT" shells finished successfully
 test_echo "$TOTAL_TESTS_PASSED" tests passed in total
+if [ "$TESTS_FAILED" = true ]; then
+    test_echo SOME TESTS FAILED
+    exit 1
+fi
