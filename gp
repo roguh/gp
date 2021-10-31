@@ -114,13 +114,16 @@ elif [ "$REMOTE_STATUS" = "Need to pull" ]; then
 elif [ "$REMOTE_STATUS" = "Need to push" ]; then
   set -x
   git push
-else
-  if [ "$REMOTE_STATUS" = "Diverged" ] && [ "$FORCE" = "true" ]; then
+elif [ "$REMOTE_STATUS" = "Diverged" ]; then
+  if [ "$FORCE" = "true" ]; then
     verbose FORCE PUSHING
     set -x
     git push --force
-    exit 0
+  else
+    verbose Not running any commands
+    echo "$REMOTE_STATUS"
   fi
+else
   verbose Not running any commands
   echo "$REMOTE_STATUS"
 fi
