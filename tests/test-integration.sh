@@ -39,6 +39,13 @@ delete_branch() {
     git branch -D "$1"
 }
 
+check_in_branch() {
+    if ! [ "$(git branch --show-current)" = "$1" ]; then
+        test_echo TEST FAILURE. Not in expected branch "$1"
+        exit 1
+    fi
+}
+
 check-repo-is-clean.sh Please commit your changes before running gp tests
 
 test_echo gp version is "$(gp --version)"
@@ -72,6 +79,7 @@ test-make-commit.sh
 set +e
 if ! printf "nope\n" | "$SHELL" gp --verbose; then
     test_echo TEST FAILURE. STATUS CODE IS ZERO
+    exit 1
 fi
 set -e
 delete_branch "$BRANCH0" local_only
@@ -97,6 +105,7 @@ end_test
 
 it pushes new commit on existing remote branch
 set -x
+check_in_branch "$BRANCH2"
 test-make-commit.sh
 "$SHELL" gp
 set +x
@@ -104,6 +113,7 @@ end_test
 
 it avoids force pushing
 set -x
+check_in_branch "$BRANCH2"
 git commit --amend -m 'Amended'
 "$SHELL" gp
 set +x
@@ -111,6 +121,7 @@ end_test
 
 it can force push
 set -x
+check_in_branch "$BRANCH2"
 git commit --amend -m 'Amended'
 "$SHELL" gp -f
 set +x
@@ -118,6 +129,7 @@ end_test
 
 it can force push. Use alternate option
 set -x
+check_in_branch "$BRANCH2"
 git commit --amend -m 'Amended 2'
 "$SHELL" gp --force
 set +x
@@ -125,6 +137,7 @@ end_test
 
 it pulls
 set -x
+check_in_branch "$BRANCH2"
 git reset --hard HEAD~1
 "$SHELL" gp
 set +x
