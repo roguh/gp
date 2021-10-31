@@ -11,11 +11,19 @@ for TEST_SHELL in sh dash bash zsh; do
         continue
     fi
 
+    echo 0 > .test-pass-count
+
     TEST_OUTPUT="test-results.$TEST_SHELL.txt"
     ./test.sh "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1
 
+    if [ "$?" = 0 ]; then
+        test_echo "SHELL=$TEST_SHELL Tests passed"
+    else
+        test_echo "SHELL=$TEST_SHELL Tests failed"
+    fi
+
     TEST_COUNT="$(cat .test-pass-count)"
-    test_echo "$TEST_COUNT tests passed. Output in $TEST_OUTPUT"
+    test_echo "SHELL=$TEST_SHELL $TEST_COUNT tests passed. Output in $TEST_OUTPUT"
     TOTAL_TESTS_PASSED=$(($TOTAL_TESTS_PASSED + $TEST_COUNT))
 done
 
