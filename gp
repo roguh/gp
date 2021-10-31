@@ -1,5 +1,7 @@
 #!/bin/sh
 ##### Author: Hugo O. Rivera 2021
+VERSION=1.0.1
+
 set -e
 
 ##### Parameters
@@ -9,12 +11,13 @@ VERBOSE=false
 ##### Helper functions
 usage() {
   # Print usage/help
-  echo "gp: Pull, push, push new branch."
+  echo "gp: Pull, push, push new branch. Version $VERSION"
   echo
   echo "USAGE: $0 [-f|--force|-h|--help]"
   echo "    -f|--force   Do not prompt for verification when pushing new branch."
   echo "                 Force push when local and remote branches diverged."
   echo "    -v|--verbose Show more output."
+  echo "    --version    Show program version."
   echo "    -h|--help    Show this message."
 }
 
@@ -36,6 +39,9 @@ if [ "$1" = "-f" ] || [ "$1" = "--force" ]; then
   FORCE=true
 elif [ "$1" = "-v" ] || [ "$1" = "--verbose" ]; then
   VERBOSE=true
+elif [ "$1" = "--version" ]; then
+  echo "$VERSION"
+  exit 0
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   usage
   exit 0

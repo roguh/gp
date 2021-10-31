@@ -39,16 +39,17 @@ delete_branch() {
     git branch -D "$1"
 }
 
-./check-repo-is-clean.sh Please commit your changes before running gp tests
+check-repo-is-clean.sh Please commit your changes before running gp tests
 
+test_echo gp version is "$(gp --version)"
 test_echo Shell is "$SHELL"
 
 it refuses to push new remote branch and verbose output.
 set -x
 git checkout -b "$BRANCH0"
-./test-make-commit.sh
+test-make-commit.sh
 set +e
-if ! printf "nope\n" | "$SHELL" ./gp --verbose; then
+if ! printf "nope\n" | "$SHELL" gp --verbose; then
     test_echo TEST FAILURE. STATUS CODE IS ZERO
 fi
 set -e
@@ -59,8 +60,8 @@ end_test
 it pushes new remote branch.
 set -x
 git checkout -b "$BRANCH1"
-./test-make-commit.sh
-printf "\n" | "$SHELL" ./gp
+test-make-commit.sh
+printf "\n" | "$SHELL" gp
 delete_branch "$BRANCH1"
 set +x
 end_test
@@ -68,43 +69,43 @@ end_test
 it pushes new remote branch without verification
 set -x
 git checkout -b "$BRANCH2"
-./test-make-commit.sh
-"$SHELL" ./gp --force
+test-make-commit.sh
+"$SHELL" gp --force
 set +x
 end_test
 
 it pushes new commit on existing remote branch
 set -x
-./test-make-commit.sh
-"$SHELL" ./gp
+test-make-commit.sh
+"$SHELL" gp
 set +x
 end_test
 
 it avoids force pushing
 set -x
 git commit --amend -m 'Amended'
-"$SHELL" ./gp
+"$SHELL" gp
 set +x
 end_test
 
 it can force push
 set -x
 git commit --amend -m 'Amended'
-"$SHELL" ./gp -f
+"$SHELL" gp -f
 set +x
 end_test
 
 it can force push. Use alternate option
 set -x
 git commit --amend -m 'Amended 2'
-"$SHELL" ./gp --force
+"$SHELL" gp --force
 set +x
 end_test
 
 it pulls
 set -x
 git reset --hard HEAD~1
-"$SHELL" ./gp
+"$SHELL" gp
 set +x
 end_test
 
