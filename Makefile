@@ -14,3 +14,6 @@ uninstall:
 
 checkbashisms:
 	shellcheck ${ALL_SHELLSCRIPTS}
+
+test:
+	./test-all-shells.sh
