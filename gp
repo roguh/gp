@@ -107,6 +107,7 @@ else
     set -x
     git push --force
     set +x
+    exit 0
   fi
   verbose Not running any commands
   echo "$REMOTE_STATUS"
