@@ -106,7 +106,6 @@ else
     verbose FORCE PUSHING
     set -x
     git push --force
-    set +x
     exit 0
   fi
   verbose Not running any commands
