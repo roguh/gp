@@ -14,6 +14,7 @@ for TEST_SHELL in sh dash bash zsh; do
     echo 0 > .test-pass-count
 
     TEST_OUTPUT="test-results.$TEST_SHELL.txt"
+    test_echo ./test.sh "$TEST_SHELL"
     ./test.sh "$TEST_SHELL" > "$TEST_OUTPUT" 2>&1
 
     if [ "$?" = 0 ]; then
