@@ -6,6 +6,7 @@ if [ "$#" = 0 ]; then
 fi
 
 TOTAL_TESTS_PASSED=0
+TOTAL_DURATION=0
 SHELL_COUNT=0
 TESTS_FAILED=false
 
@@ -40,11 +41,12 @@ for TEST_SHELL in "$@"; do
 
     TEST_COUNT="$(cat .test-pass-count)"
     DURATION=$(($(date +%s) - START_TIME))
+    TOTAL_DURATION=$((TOTAL_DURATION + DURATION))
     test_echo "SHELL=$TEST_SHELL $TEST_COUNT tests passed in $DURATION seconds. Output in $TEST_OUTPUT"
     TOTAL_TESTS_PASSED=$((TOTAL_TESTS_PASSED + TEST_COUNT))
 done
 
-test_echo Testing "$SHELL_COUNT" shells finished successfully
+test_echo Testing "$SHELL_COUNT" shells finished successfully in "$TOTAL_DURATION" seconds
 test_echo "$TOTAL_TESTS_PASSED" tests passed in total
 if [ "$TESTS_FAILED" = true ]; then
     test_echo SOME TESTS FAILED
