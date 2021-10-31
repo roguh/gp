@@ -1,4 +1,4 @@
-SHELLSCRIPTS=gp git-remote-status.sh
+SHELLSCRIPTS=gp
 ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 test-install.sh $(shell find tests -iname \*.sh)
 
 install-to-user:

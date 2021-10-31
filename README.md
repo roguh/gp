@@ -23,7 +23,7 @@ gp -f
 
 ## Installation
 
-Simply copy `gp` and `git-remote-status.sh` to your favorite binary location.
+Simply copy `gp` to your favorite binary location.
 
 Alternatively, run
 

@@ -54,7 +54,35 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 ##### Get git status
-REMOTE_STATUS="$(git-remote-status.sh)"
+git remote update
+
+set +e
+UPSTREAM='@{u}'
+LOCAL="$(git rev-parse @)"
+# Can nest double quotes when inside $()
+REMOTE="$(git rev-parse "$UPSTREAM" 2>/dev/null)"
+BASE="$(git merge-base @ "$UPSTREAM" 2>/dev/null)"
+set -e
+
+if [ "$DEBUG_GIT_REMOTE_STATUS" = "true" ]; then
+    echo Upstream "$UPSTREAM" >&2
+    echo Local "$LOCAL" >&2
+    echo Remote "$REMOTE" >&2
+    echo Base "$BASE" >&2
+fi
+
+REMOTE_STATUS="Unknown"
+if [ "$REMOTE" = "" ]; then
+    REMOTE_STATUS="No remote"
+elif [ "$LOCAL" = "$REMOTE" ]; then
+    REMOTE_STATUS="Up-to-date"
+elif [ "$LOCAL" = "$BASE" ]; then
+    REMOTE_STATUS="Need to pull"
+elif [ "$REMOTE" = "$BASE" ]; then
+    REMOTE_STATUS="Need to push"
+else
+    REMOTE_STATUS="Diverged"
+fi
 
 ##### Push, pull, push new, force push, or do nothing
 if [ "$REMOTE_STATUS" = "No remote" ]; then
