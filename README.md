@@ -79,18 +79,18 @@ Also read the output to determine if `gp` is behaving correctly.
 make test-on-linux
 ```
 
-Note this command runs the `test.sh` within the test shell itself.
+Note this command runs the `test-integration.sh` within the test shell itself.
 
 ### Running tests one shell at a time
 
 Run the following commands:
 
 ```
-./tests/test.sh sh
-./tests/test.sh dash
-./tests/test.sh bash
-BASH_COMPAT=31 ./tests/test.sh bash
-./tests/test.sh zsh
+./tests/test-integration.sh sh
+./tests/test-integration.sh dash
+./tests/test-integration.sh bash
+BASH_COMPAT=31 ./tests/test-integration.sh bash
+./tests/test-integration.sh zsh
 ```
 
 ### Test results
