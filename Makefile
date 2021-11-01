@@ -2,7 +2,8 @@ LINUX_SHELLS=dash bash zsh
 STRICT_SHELLS=yash ksh
 MACOS_SHELLS=bash zsh
 SHELLSCRIPTS=gp
-ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 $(shell ls tests/*.sh)
+TEST_SHELLSCRIPTS=tests/bash-3.1 $(shell ls tests/*.sh)
+ALL_SHELLSCRIPTS=${SHELLSCRIPTS} ${TEST_SHELLSCRIPTS}
 GITHUB_ACTIONS_FILES=.github/workflows/on-pr-to-main.yml
 
 setup-cicd-unit-tests:
@@ -68,4 +69,4 @@ unit-test-on-macos:
 
 line-count:
 	cloc ${SHELLSCRIPTS}
-	cloc tests
+	cloc ${TEST_SHELLSCRIPTS}
