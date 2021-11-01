@@ -55,7 +55,27 @@ cd gp
 make install-to-user
 ```
 
-## Testing
+## Unit Testing
+
+### Linux: Running tests for many shells at once
+
+```
+make unit-test-on-linux
+```
+
+To include stricter POSIX shells:
+
+```
+make unit-test-all-on-linux
+```
+
+### Bash: Running tests for many shells at once
+
+```
+make unit-test-on-macos
+```
+
+## Integration Testing
 
 Testing is a semi-manual process.
 Make sure you have permission to push new branches to the remote repository.
@@ -63,7 +83,7 @@ Make sure you have permission to push new branches to the remote repository.
 If the test script fails, the tests have failed.
 Also read the output to determine if `gp` is behaving correctly.
 
-Note the `test-all-shells.sh` script runs the `test-integration.sh` script using the test shell itself.
+Note the `test-integration-all-shells.sh` script runs the `test-integration.sh` script using the test shell itself.
 
 ### Linux: Running tests for many shells at once
 
@@ -130,6 +150,7 @@ make check
 - To demonstrate how I would deploy code. Features:
   - Linting and other automated checks.
   - Thorough tests.
-    This repo has many integration tests and a way to run them on many different platforms.
+    - Integration tests and a way to run them on many different platforms.
+    - Unit tests that run on many shells, even on Bash 2.03
   - Good documentation.
   - GitHub Actions for running tests and code checks.

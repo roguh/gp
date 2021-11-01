@@ -1,12 +1,17 @@
 LINUX_SHELLS=dash bash zsh
 STRICT_SHELLS=yash ksh
+MACOS_SHELLS=bash zsh
 SHELLSCRIPTS=gp
 ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 $(shell find tests -iname \*.sh)
 GITHUB_ACTIONS_FILES=.github/workflows/on-pr-to-main.yml
 
-setup-cicd:
+setup-cicd-unit-tests:
 	apt-get update -y
-	apt-get install -y shellcheck $(LINUX_SHELLS) $(STRICT_SHELLS)
+	apt-get install -y $(LINUX_SHELLS) $(STRICT_SHELLS)
+	make download-shellspec
+
+download-shellspec:
+	git clone --depth 1 https://github.com/shellspec/shellspec.git tests/shellspec
 
 build-readme:
 	./utils/generate_readme.py ./README.template.md > ./README.md
@@ -39,18 +44,27 @@ check-github-actions:
 	yamllint $(GITHUB_ACTIONS_FILES)
 
 test-on-linux:
-	./tests/test-all-shells.sh $(LINUX_SHELLS) ./tests/bash-3.1
+	./tests/test-integration-all-shells.sh $(LINUX_SHELLS) ./tests/bash-3.1
 
 test-on-strict-posix-shells:
-	./tests/test-all-shells.sh $(STRICT_SHELLS)
+	./tests/test-integration-all-shells.sh $(STRICT_SHELLS)
 
 test-all-on-linux:
 	# If this fails, check the tests/test-results.*.txt files
-	./tests/test-all-shells.sh $(LINUX_SHELLS) $(STRICT_SHELLS) ./tests/bash-3.1
+	./tests/test-integration-all-shells.sh $(LINUX_SHELLS) $(STRICT_SHELLS) ./tests/bash-3.1
 
 test-on-macos:
 	# TODO add other shells?
-	./tests/test-all-shells.sh bash zsh
+	./tests/test-integration-all-shells.sh $(MACOS_SHELLS)
+
+unit-test-on-linux:
+	./tests/test-unit-all-shells.sh $(LINUX_SHELLS)
+
+unit-test-all-on-linux:
+	./tests/test-unit-all-shells.sh $(LINUX_SHELLS) $(STRICT_SHELLS)
+
+unit-test-on-macos:
+	./tests/test-unit-all-shells.sh $(MACOS_SHELLS)
 
 line-count:
 	cloc ${SHELLSCRIPTS}
