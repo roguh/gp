@@ -8,7 +8,7 @@ name: "On PR or Push to main: Test code"
     branches: [main]
 
 jobs:
-  integration-tests:
+  unit-tests:
 
     runs-on: ubuntu-20.04
 
@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo make setup-cicd
+        run: sudo make setup-cicd-unit-tests
 
-      - name: Integration tests on all supported shells
-        run: make test-all-on-linux
+      - name: Unit tests on all supported shells
+        run: make unit-test-all-on-linux
 
   code-check:
 

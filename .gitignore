@@ -1,2 +1,4 @@
 test-results*
 .test-pass-count
+coverage/
+tests/shellspec/

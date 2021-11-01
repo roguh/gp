@@ -13,11 +13,11 @@ usage() {
   # Print usage/help
   echo "gp: Pull, push, push new branch. Version $VERSION"
   echo
-  echo - If there are changes in the remote branch, pull
-  echo - If there are changes in the local branch, push
-  echo - If there is no remote branch, prompt to push a new branch.
+  echo "- If there are changes in the remote branch, pull"
+  echo "- If there are changes in the local branch, push"
+  echo "- If there is no remote branch, prompt to push a new branch."
   echo "  Skip prompt with gp -f"
-  echo - If the branches have diverged, do nothing.
+  echo "- If the branches have diverged, do nothing."
   echo "  Force push with gp -f"
   echo
   echo "USAGE: gp [-f|-v|-h|--version]"
@@ -28,11 +28,20 @@ usage() {
   echo "    --version    Show program version."
 }
 
+log() {
+  echo "$@" >&2
+}
+
 verbose() {
   # Call to print verbose output
   if [ "$VERBOSE" = true ]; then
-    echo gp: "$@"
+    log "gp:" "$@"
   fi
+}
+
+run() {
+  log "+ " "$@"
+  "$@"
 }
 
 ##### Parse arguments
@@ -61,13 +70,14 @@ else
 fi
 
 ##### Check if in git repo
+git rev-parse --git-dir
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo fatal: not in a git repo >&2
   exit 1
 fi
 
 ##### Get git status
-git remote update
+run git remote update
 
 set +e
 UPSTREAM='@{u}'
@@ -106,24 +116,20 @@ if [ "$REMOTE_STATUS" = "No remote" ]; then
       exit 1
     fi
   fi
-  set -x
-  git push --set-upstream origin "$(git branch --show-current)"
+  run git push --set-upstream origin "$(git branch --show-current)"
 elif [ "$REMOTE_STATUS" = "Need to pull" ]; then
-  set -x
-  git pull
+  run git pull
 elif [ "$REMOTE_STATUS" = "Need to push" ]; then
-  set -x
-  git push
+  run git push
 elif [ "$REMOTE_STATUS" = "Diverged" ]; then
   if [ "$FORCE" = "true" ]; then
     verbose FORCE PUSHING
-    set -x
-    git push --force
+    run git push --force
   else
     verbose Not running any commands
-    echo "$REMOTE_STATUS"
+    log "$REMOTE_STATUS"
   fi
 else
   verbose Not running any commands
-  echo "$REMOTE_STATUS"
+  log "$REMOTE_STATUS"
 fi
