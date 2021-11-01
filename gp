@@ -70,7 +70,6 @@ else
 fi
 
 ##### Check if in git repo
-git rev-parse --git-dir
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo fatal: not in a git repo >&2
   exit 1
