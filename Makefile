@@ -24,7 +24,7 @@ release:
 	./utils/bump-version.sh "$(VERSION)"
 	make build-readme
 	git commit -am "Bump version to $(VERSION)" -m "$(TITLE)"
-	gh release create "v$(VERSION)" --title "$(VERSION) $(TITLE)" $(SHELLSCRIPTS)
+	gh release create --target main "v$(VERSION)" --title "$(VERSION) $(TITLE)" $(SHELLSCRIPTS)
 
 install-to-user:
 	cp ${SHELLSCRIPTS} ~/bin/
