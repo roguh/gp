@@ -11,7 +11,7 @@ Like the waves.
 
 ```
 gp --help
-gp: Pull, push, push new branch. Version 1.3.5
+gp: Pull, push, push new branch. Version 1.3.6
 
 - If there are changes in the remote branch, pull
 - If there are changes in the local branch, push
