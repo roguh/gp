@@ -6,12 +6,13 @@ build-readme:
 
 release:
 	# Check version is valid
-	echo $(VERSION) | grep '^[0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?$$' || (echo Must pass version string as \`make VERSION=XX.YY[.ZZ]\` && false)
+	[ "$(TITLE)" != "" ] || (echo Please set the title with \`make TITLE=...\`; false)
+	echo "$(VERSION)" | grep '^[0-9]\+\.[0-9]\+\(\.[0-9]\+\)\?$$' || (echo Must pass version string as \`make VERSION=XX.YY[.ZZ]\`; false)
 	./tests/check-repo-is-clean.sh Please commit your changes before bumping version
-	./utils/bump-version.sh $(VERSION)
+	./utils/bump-version.sh "$(VERSION)"
 	make build-readme
 	git commit -am "Bump version to $(VERSION)" -m "$(TITLE)"
-	gh release create v$(VERSION) --title "$(VERSION) $(TITLE)" $(SHELLSCRIPTS)
+	gh release create "v$(VERSION)" --title "$(VERSION) $(TITLE)" $(SHELLSCRIPTS)
 
 install-to-user:
 	cp ${SHELLSCRIPTS} ~/bin/
