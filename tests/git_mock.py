@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from pprint import pprint
 
 # define subcommands to mock git behavior:
 # DONE if git rev-parse, if in git-repo exit 0 else exit 1
@@ -15,7 +14,7 @@ from pprint import pprint
 # unit test: define git() as ./this.py <CONFIG ARGS> "$@"
 
 
-def rev_parse(args, unknown_args):
+def rev_parse(args):
     if args.git_dir:
         sys.exit(1 if args.not_in_a_git_repo else 0)
     elif args.rev == "@":
@@ -26,30 +25,30 @@ def rev_parse(args, unknown_args):
         raise NotImplementedError(f"rev={args.rev}")
 
 
-def remote(_, unknown_args):
+def remote(_):
     # Do nothing but successfully exit
     pass
 
 
-def merge_base(args, unknown_args):
+def merge_base(args):
     if args.rev == "@" and args.upstream_rev == "@{u}":
         print(args.base_branch)
     else:
         raise NotImplementedError(f"rev={args.rev} upstream_rev={args.upstream_rev}")
 
 
-def branch(args, unknown_args):
+def branch(args):
     if args.show_current:
         print(args.local_branch_name)
     else:
         raise NotImplementedError("show_current=False")
 
 
-def push(args, unknown_args):
+def push(args):
     pass
 
 
-def pull(args, unknown_args):
+def pull(args):
     pass
 
 
@@ -88,8 +87,9 @@ def main():
     pull_parser = subparsers.add_parser("pull")
     pull_parser.set_defaults(func=pull)
 
-    args, unknown = parser.parse_known_args()
-    args.func(args, unknown)
+    # Ignore unknown arguments
+    args, _ = parser.parse_known_args()
+    args.func(args)
 
 
 if __name__ == "__main__":
