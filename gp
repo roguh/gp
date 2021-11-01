@@ -1,6 +1,6 @@
 #!/bin/sh
 ##### Author: Hugo O. Rivera 2021
-VERSION=1.3.3
+VERSION=1.3.4
 
 set -e
 
