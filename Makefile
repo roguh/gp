@@ -1,5 +1,11 @@
+LINUX_SHELLS=dash bash zsh
+STRICT_SHELLS=yash ksh
 SHELLSCRIPTS=gp
 ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 test-install.sh $(shell find tests -iname \*.sh)
+
+setup-cicd:
+	apt-get update -y
+	apt-get install -y shellcheck $(LINUX_SHELLS) $(STRICT_SHELLS)
 
 build-readme:
 	./utils/generate_readme.py ./README.template.md > ./README.md
@@ -29,10 +35,14 @@ check:
 	shellcheck ${ALL_SHELLSCRIPTS}
 
 test-on-linux:
-	./tests/test-all-shells.sh dash bash zsh ./tests/bash-3.1
+	./tests/test-all-shells.sh $(LINUX_SHELLS) ./tests/bash-3.1
 
 test-on-strict-posix-shells:
-	./tests/test-all-shells.sh yash ksh
+	./tests/test-all-shells.sh $(STRICT_SHELLS)
+
+test-all-on-linux:
+	# If this fails, check the tests/test-results.*.txt files
+	./tests/test-all-shells.sh $(LINUX_SHELLS) $(STRICT_SHELLS) ./tests/bash-3.1
 
 test-on-macos:
 	# TODO add other shells?
