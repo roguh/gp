@@ -1,7 +1,7 @@
 LINUX_SHELLS=dash bash zsh
 STRICT_SHELLS=yash ksh
 SHELLSCRIPTS=gp
-ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 test-install.sh $(shell find tests -iname \*.sh)
+ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 $(shell find tests -iname \*.sh)
 GITHUB_ACTIONS_FILES=.github/workflows/on-pr-to-main.yml
 
 setup-cicd:

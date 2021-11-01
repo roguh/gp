@@ -63,6 +63,10 @@ it handles unrecognized arguments
 set +e
 set -x
 for args in --halp -vf nope '--help too many'; do
+    # We need to disable the linter warning here because we actually do want
+    # to pass the $args variable as multiple arguments, not a single argument
+    # containing spaces.
+    # shellcheck disable=SC2086
     if "$SHELL" gp $args; then
         test_echo TEST FAILURE. gp should not have accepted arguments "$args"
         exit 1

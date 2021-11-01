@@ -13,11 +13,11 @@ usage() {
   # Print usage/help
   echo "gp: Pull, push, push new branch. Version $VERSION"
   echo
-  echo - If there are changes in the remote branch, pull
-  echo - If there are changes in the local branch, push
-  echo - If there is no remote branch, prompt to push a new branch.
+  echo "- If there are changes in the remote branch, pull"
+  echo "- If there are changes in the local branch, push"
+  echo "- If there is no remote branch, prompt to push a new branch."
   echo "  Skip prompt with gp -f"
-  echo - If the branches have diverged, do nothing.
+  echo "- If the branches have diverged, do nothing."
   echo "  Force push with gp -f"
   echo
   echo "USAGE: gp [-f|-v|-h|--version]"
