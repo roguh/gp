@@ -2,7 +2,7 @@ LINUX_SHELLS=dash bash zsh
 STRICT_SHELLS=yash ksh
 MACOS_SHELLS=bash zsh
 SHELLSCRIPTS=gp
-ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 $(shell find tests -iname \*.sh)
+ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 $(shell ls tests/*.sh)
 GITHUB_ACTIONS_FILES=.github/workflows/on-pr-to-main.yml
 
 setup-cicd-unit-tests:
