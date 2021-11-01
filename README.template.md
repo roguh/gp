@@ -119,3 +119,17 @@ Use shellcheck to check shellscripts.
 ```
 make check
 ```
+
+## Why?
+
+- I wanted a convenient shortcut for `git pull` and `git push`.
+  I recently created git aliases (and fish abbreviations), e.g. `gl` for `git
+  log`, and I wanted to use `gp` for either `git pull` or `git push` depending
+  on the state of the repo. This needed more complex code so I wrote this script
+  and eventually moved it to its own repo.
+- To demonstrate how I would deploy code. Features:
+  - Linting and other automated checks.
+  - Thorough tests.
+    This repo has many integration tests and a way to run them on many different platforms.
+  - Good documentation.
+  - GitHub Actions for running tests and code checks.
