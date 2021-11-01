@@ -2,6 +2,7 @@ LINUX_SHELLS=dash bash zsh
 STRICT_SHELLS=yash ksh
 SHELLSCRIPTS=gp
 ALL_SHELLSCRIPTS=${SHELLSCRIPTS} tests/bash-3.1 test-install.sh $(shell find tests -iname \*.sh)
+GITHUB_ACTIONS_FILES=.github/workflows/on-pr-to-main.yml
 
 setup-cicd:
 	apt-get update -y
@@ -33,6 +34,9 @@ uninstall:
 
 check:
 	shellcheck ${ALL_SHELLSCRIPTS}
+
+check-github-actions:
+	yamllint $(GITHUB_ACTIONS_FILES)
 
 test-on-linux:
 	./tests/test-all-shells.sh $(LINUX_SHELLS) ./tests/bash-3.1
