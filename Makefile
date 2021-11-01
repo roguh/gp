@@ -12,7 +12,7 @@ setup-cicd-unit-tests:
 	make download-shellspec
 
 download-shellspec:
-	git clone --depth 1 https://github.com/shellspec/shellspec.git tests/shellspec
+	git clone --depth 1 https://github.com/shellspec/shellspec.git external/shellspec
 
 build-readme:
 	./utils/generate_readme.py ./README.template.md > ./README.md
