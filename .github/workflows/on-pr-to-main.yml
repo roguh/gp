@@ -1,0 +1,32 @@
+name: "On PR: Test code"
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  integration-tests:
+  
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: make setup-cicd
+      
+    - name: Integration tests on all supported shells
+      run: make test-all-on-linux:
+
+  code-check:
+    
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: apt-get install -y shellcheck
+
+    - name: ShellCheck
+      run: make check
