@@ -7,7 +7,7 @@
 # command to fit my pattern.
 # "gp" is now either "git push" or "git pull" or a no-op, depending on your
 # git tree and the remote's statuses
-VERSION=1.3.6
+VERSION=1.4.0
 
 set -e
 

@@ -19,7 +19,7 @@ git tree and the remote's statuses
 
 ```
 gp --help
-gp: Pull, push, push new branch. Version 1.3.6
+gp: Pull, push, push new branch. Version 1.4.0
 
 - If there are changes in the remote branch, pull
 - If there are changes in the local branch, push
