@@ -7,6 +7,14 @@ Use `make build-readme to update the README file
 
 Like the waves.
 
+Originally written in 2021 as I realized I could make fish abbreviations or
+shell aliases for most git commands using two letters, e.g.
+"gl" for git log, but "gp" could feasibly be "git pull" or "git push"
+Henceforth, I wrote this tool to consolidate both actions into one short
+command to fit my pattern.
+"gp" is now either "git push" or "git pull" or a no-op, depending on your
+git tree and the remote's statuses
+
 ## Usage
 
 ```

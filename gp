@@ -1,5 +1,12 @@
 #!/bin/sh
-##### Author: Hugo O. Rivera 2021
+##### Author: Felina A. Rivera 2023
+# Originally written in 2021 as I realized I could make fish abbreviations or
+# shell aliases for most git commands using two letters, e.g.
+# "gl" for git log, but "gp" could feasibly be "git pull" or "git push"
+# Henceforth, I wrote this tool to consolidate both actions into one short
+# command to fit my pattern.
+# "gp" is now either "git push" or "git pull" or a no-op, depending on your
+# git tree and the remote's statuses
 VERSION=1.3.6
 
 set -e
@@ -70,6 +77,7 @@ else
 fi
 
 ##### Check if in git repo
+git rev-parse --git-dir
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo fatal: not in a git repo >&2
   exit 1
